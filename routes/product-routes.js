@@ -8,9 +8,8 @@ function getProducts(req, res) {
     let query = product.find({});
     query.exec((err, products) => {
         if(err) res.send(err);
-    res.json(products);
-})
-    ;
+        res.json(products);
+    });
 }
 
 /*
@@ -24,11 +23,10 @@ function storeProduct(req, res) {
         }
         else {
             res.json({
-            message: "Product successfully added!", product
-        });
-}
-})
-    ;
+                message: "Product successfully added!", product
+            });
+        }
+    });
 }
 
 /*
@@ -37,9 +35,8 @@ function storeProduct(req, res) {
 function getProduct(req, res) {
     product.findById(req.params.id, (err, product) => {
         if(err) res.send(err);
-    res.json(product);
-})
-    ;
+        res.json(product);
+    });
 }
 
 /*
@@ -48,8 +45,7 @@ function getProduct(req, res) {
 function deleteProduct(req, res) {
     product.remove({_id: req.params.id}, (err, result) => {
         res.json({message: "Product successfully deleted!", result});
-})
-    ;
+    });
 }
 
 /*
@@ -58,13 +54,11 @@ function deleteProduct(req, res) {
 function updateProduct(req, res) {
     product.findById({_id: req.params.id}, (err, product) => {
         if(err) res.send(err);
-    Object.assign(product, req.body).save((err, product) => {
-        if(err) res.send(err);
-    res.json({message: 'Product updated!', product});
-})
-    ;
-})
-    ;
+        Object.assign(product, req.body).save((err, product) => {
+            if(err) res.send(err);
+            res.json({message: 'Product updated!', product});
+        });
+    });
 }
 
 module.exports = {getProducts, storeProduct, getProduct, deleteProduct, updateProduct};
